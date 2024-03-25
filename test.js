@@ -1,22 +1,22 @@
-const arr = [
-    {title: "cde", description: "dfasfa", editMode: true},
-    {title: "cde", description: "dfasfa", editMode: true},
-    {title: "cde", description: "dfasfa", editMode: true},
-    {title: "cde", description: "dfasfa", editMode: true},
-];
+function convertTimeToMilliseconds(time) {
+  const timeString = time?.toString();
 
-const newArr = arr.map((item, index) => {
-    const { editMode, ...rest } = item;
-  
-    // Your additional checking and functions here
-    if (index === 1) {
-      return {
-        title : "Hi",
-        description : "Hello",
-      }
-    }
-  
-    return rest;
-  });
+  const regex = /^(\d+)(ms|s)$/;
+  const match = timeString?.match(regex);
 
-console.log(newArr);
+  if (!match) {
+    return
+  }
+
+  const value = parseInt(match[1]);
+  const unit = match[2];
+
+  if (unit === 'ms') {
+      return value;
+  } else if (unit === 's') {
+      return value * 1000;
+  }
+}
+
+console.log(convertTimeToMilliseconds('200ms'));
+console.log(convertTimeToMilliseconds('2s'));

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useRef, useState } from 'react';
+import { useNotifications } from '../Notification/NotificationContext';
 import './ToDoApp.css';
 import { MdDelete } from "react-icons/md";
 import { FaPlusCircle } from "react-icons/fa";
@@ -20,6 +21,8 @@ const ToDoApp = () => {
   const descriptionEditRef = useRef(null); // Ref for description input
 
   const [showAll, setShowAll] = useState(true);
+
+  const { addNotification } = useNotifications();
 
   useEffect(() => {
     localStorage.setItem("to-dos", JSON.stringify(todo.map(({ editMode, ...rest }) => rest)));
@@ -71,8 +74,8 @@ const ToDoApp = () => {
                     </div>
                   </div>
                   <div className="todo-button">
-                    <button type='submit' className='submit'><FaSave /></button>
-                    <button className='delete' onClick={(e) => deleteHandler(e, index)}><MdDelete /></button>
+                    <button type='submit' aria-label="submit todo task edit" className='submit'><FaSave /></button>
+                    <button className='delete' aria-label="delete todo task" onClick={(e) => deleteHandler(e, index)}><MdDelete /></button>
                   </div>
                 </form>
               </> :
@@ -93,8 +96,8 @@ const ToDoApp = () => {
                   }
                 </div>
                 <div className="todo-button">
-                  <button className='edit' onClick={() => editHandler(index)}><FaEdit /></button>
-                  <button className='delete' onClick={(e) => deleteHandler(e, index)}><MdDelete /></button>
+                  <button className='edit' aria-label="edit todo task" onClick={() => editHandler(index)}><FaEdit /></button>
+                  <button className='delete' aria-label="delete todo task" onClick={(e) => deleteHandler(e, index)}><MdDelete /></button>
                 </div>
               </>
           }
@@ -120,6 +123,12 @@ const ToDoApp = () => {
     });
     setTitle('');
     setDescription('');
+    addNotification(
+      {
+        text: "New Task Added",
+        status: "success",
+      }
+    );
   }
 
   const handleTitle = (e) => {
@@ -137,6 +146,13 @@ const ToDoApp = () => {
       newTodo.splice(index, 1);
       return (newTodo);
     });
+    addNotification(
+      {
+        text: "Task Removed",
+        status: "success",
+        background: "#bf0000",
+      }
+    );
   }
 
   const editHandler = (index) => {
@@ -178,6 +194,13 @@ const ToDoApp = () => {
       // console.log("Hello");
       return (newTodo);
     });
+    addNotification(
+      {
+        text: "Task updated",
+        status: "success",
+        background: "green",
+      }
+    );
   }
 
   const handleComplete = (index) => {
@@ -185,6 +208,13 @@ const ToDoApp = () => {
     if (todoItem.editMode) {
       return;
     }
+    addNotification(
+      {
+        text: `${todoItem.isCompleted ? `Task marked as incomplete` : `Task completed`}`,
+        status: "success",
+        background: "purple",
+      }
+    );
     setTodo((prevTodo) => {
       const newTodo = prevTodo.map((todo, indx) => {
         if (index === indx) {
@@ -240,13 +270,13 @@ const ToDoApp = () => {
               }
             </div>
             <div className="button">
-              <button type='submit'>
+              <button type='submit' aria-label="submit">
                 <FaPlusCircle size={25} />
               </button>
             </div>
           </form>
           <div className="line"></div>
-          <div className={`todos ${ todo.length !== 0 ? `haveTodos` : `` }`}>
+          <div className={`todos ${todo.length !== 0 ? `haveTodos` : ``}`}>
             <div className="todos-text">
               <div className="text">My Todos</div>
               {
