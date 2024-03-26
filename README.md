@@ -40,8 +40,8 @@ Netlify: [React ToDo App Demo](https://ritoncharlox-react-todo-app.netlify.app/)
 To run this project locally, follow these steps:
 
 - Clone this repository:
-```
-https://github.com/ritoncharlox/React-ToDo-App.git
+```bash
+git clone https://github.com/ritoncharlox/React-ToDo-App.git
 ```
 - Access the cloned directory:
 ```
