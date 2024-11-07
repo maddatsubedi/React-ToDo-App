@@ -41,7 +41,7 @@ To run this project locally, follow these steps:
 
 - Clone this repository:
 ```bash
-git clone https://github.com/ritoncharlox/React-ToDo-App.git
+git clone https://github.com/maddatsubedi/React-ToDo-App.git
 ```
 - Access the cloned directory:
 ```
