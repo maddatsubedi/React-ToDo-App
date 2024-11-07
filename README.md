@@ -10,7 +10,7 @@
 
 You can access the live demo of this TodoApp on Netlify:
 <br>
-Netlify: [React ToDo App Demo](https://ritoncharlox-react-todo-app.netlify.app/)
+Netlify: [React ToDo App Demo](https://maddat-react-todo-app.netlify.app/)
 
 ## How to Use
 1. **Add a new task**: Type your task title and description into the input fields provided and press Enter or click the Add button.
